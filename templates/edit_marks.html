@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Marks</title>
+</head>
+
+<body>
+
+<h1>Edit Marks</h1>
+
+<p>Student: {{ mark["name"] }}</p>
+
+<p>Subject: {{ mark["subject_name"] }}</p>
+
+<form method="POST">
+
+    <input
+        type="number"
+        name="marks"
+        value="{{ mark['marks'] }}"
+        min="0"
+        max="100"
+        step="0.01"
+        required
+    >
+
+    <button type="submit">
+        Update Marks
+    </button>
+
+</form>
+
+<br>
+
+<a href="/admin/marks">Back</a>
+
+</body>
+
+</html>

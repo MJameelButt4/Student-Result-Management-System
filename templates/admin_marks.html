@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Marks{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h1 class="fw-bold">
+                <i class="fa-solid fa-pen-to-square text-danger me-2"></i>
+                Manage Marks
+            </h1>
+
+            <p class="text-muted mb-0">
+                Add and manage student marks
+            </p>
+        </div>
+
+        <a href="/admin" class="btn btn-outline-primary">
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Add Marks -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header bg-danger text-white">
+
+            <h5 class="mb-0">
+                <i class="fa-solid fa-plus me-2"></i>
+                Add Marks
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST" action="/admin/marks">
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Student
+                        </label>
+
+                        <select
+                            name="student_id"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="">
+                                Select Student
+                            </option>
+
+                            {% for student in students %}
+
+                            <option value="{{ student['id'] }}">
+                                {{ student['name'] }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Subject
+                        </label>
+
+                        <select
+                            name="subject_id"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="">
+                                Select Subject
+                            </option>
+
+                            {% for subject in subjects %}
+
+                            <option value="{{ subject['id'] }}">
+                                {{ subject['subject_name'] }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <label class="form-label fw-semibold">
+                            Marks
+                        </label>
+
+                        <input
+                            type="number"
+                            name="marks"
+                            class="form-control"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            placeholder="0-100"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger w-100"
+                        >
+                            <i class="fa-solid fa-plus me-1"></i>
+                            Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Existing Marks -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+                <i class="fa-solid fa-list me-2"></i>
+                Existing Marks
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if marks %}
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>Student</th>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for mark in marks %}
+
+                        <tr>
+
+                            <td class="fw-semibold">
+                                {{ mark["student_name"] }}
+                            </td>
+
+                            <td>
+                                {{ mark["subject_name"] }}
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-primary fs-6">
+                                    {{ mark["marks"] }}
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="/admin/marks/edit/{{ mark['id'] }}"
+                                    class="btn btn-sm btn-outline-primary"
+                                >
+                                    <i class="fa-solid fa-pen me-1"></i>
+                                    Edit
+                                </a>
+
+                                <a
+                                    href="/admin/marks/delete/{{ mark['id'] }}"
+                                    class="btn btn-sm btn-outline-danger confirm-action"
+                                    data-message="Are you sure you want to delete these marks?"
+                                >
+                                    <i class="fa-solid fa-trash me-1"></i>
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-info mb-0">
+                No marks have been added yet.
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

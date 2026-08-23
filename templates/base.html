@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Student Result System
+        {% endblock %}
+    </title>
+
+
+    <!-- Bootstrap 5 CSS -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+
+    <!-- Custom CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+
+        <div class="container">
+
+
+            <!-- Logo -->
+
+            <a class="navbar-brand" href="/">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                Student Result System
+
+            </a>
+
+
+            <!-- Mobile Menu Button -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <!-- Navbar Links -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarMenu"
+            >
+
+
+                <ul class="navbar-nav ms-auto">
+
+
+                    <!-- ================= ADMIN ================= -->
+
+                    {% if session.get("role") == "admin" %}
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/admin"
+                            >
+
+                                <i class="fa-solid fa-gauge"></i>
+
+                                Admin Dashboard
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/admin/classes"
+                            >
+
+                                <i class="fa-solid fa-school"></i>
+
+                                Classes
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/admin/subjects"
+                            >
+
+                                <i class="fa-solid fa-book"></i>
+
+                                Subjects
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/admin/students"
+                            >
+
+                                <i class="fa-solid fa-users"></i>
+
+                                Students
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/admin/marks"
+                            >
+
+                                <i class="fa-solid fa-pen"></i>
+
+                                Marks
+
+                            </a>
+
+                        </li>
+
+
+                    <!-- ================= STUDENT ================= -->
+
+                    {% else %}
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/dashboard"
+                            >
+
+                                <i class="fa-solid fa-house"></i>
+
+                                Dashboard
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/subjects"
+                            >
+
+                                <i class="fa-solid fa-book"></i>
+
+                                Subjects
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="/results"
+                            >
+
+                                <i class="fa-solid fa-chart-column"></i>
+
+                                Results
+
+                            </a>
+
+                        </li>
+
+
+                    {% endif %}
+
+
+                    <!-- ================= LOGOUT ================= -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link text-danger"
+                            href="/logout"
+                        >
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            Logout
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= PAGE CONTENT ================= -->
+
+    <!-- Flash Messages -->
+
+<div class="container mt-3">
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div
+                    class="alert alert-success alert-dismissible fade show shadow-sm"
+                    role="alert"
+                >
+
+                    <i class="fa-solid fa-circle-check me-2"></i>
+
+                    {{ message }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                    ></button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+
+    <!-- Bootstrap JavaScript -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- Custom JavaScript -->
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
+
+
+</body>
+
+</html>

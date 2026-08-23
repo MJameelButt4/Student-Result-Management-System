@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}
+Subjects
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h1 class="fw-bold">
+                <i class="fa-solid fa-book text-primary me-2"></i>
+                Subjects
+            </h1>
+
+            <p class="text-muted mb-0">
+                View available subjects
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if subjects %}
+
+        <div class="row g-4">
+
+            {% for subject in subjects %}
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card shadow-sm h-100">
+
+                        <div class="card-body">
+
+                            <div class="d-flex align-items-center">
+
+                                <div class="fs-2 text-primary me-3">
+
+                                    <i class="fa-solid fa-book-open"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h5 class="mb-1">
+                                        {{ subject["subject_name"] }}
+                                    </h5>
+
+                                    <small class="text-muted">
+                                        Subject ID: {{ subject["id"] }}
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            <i class="fa-solid fa-circle-info me-2"></i>
+
+            No subjects available.
+
+        </div>
+
+    {% endif %}
+
+
+    <div class="mt-4">
+
+        <a
+            href="/dashboard"
+            class="btn btn-outline-primary"
+        >
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

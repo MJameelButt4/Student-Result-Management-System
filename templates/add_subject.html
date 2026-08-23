@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Subjects{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h1 class="fw-bold">
+
+                <i class="fa-solid fa-book text-primary me-2"></i>
+
+                Manage Subjects
+
+            </h1>
+
+            <p class="text-muted">
+                Manage subjects for your classes
+            </p>
+
+        </div>
+
+
+        <a
+            href="/admin"
+            class="btn btn-outline-primary"
+        >
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Subject</th>
+
+                            <th>Class</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for subject in subjects %}
+
+                        <tr>
+
+                            <td>
+                                {{ subject["id"] }}
+                            </td>
+
+                            <td class="fw-semibold">
+
+                                <i class="fa-solid fa-book-open text-primary me-2"></i>
+
+                                {{ subject["subject_name"] }}
+
+                            </td>
+
+                            <td>
+
+                                {{ subject["class_name"] if subject["class_name"] is defined else "—" }}
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="/admin/subjects/edit/{{ subject['id'] }}"
+                                    class="btn btn-sm btn-outline-primary"
+                                >
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                    Edit
+
+                                </a>
+
+
+                                <a
+                                    href="/admin/subjects/delete/{{ subject['id'] }}"
+                                    class="btn btn-sm btn-outline-danger confirm-action"
+                                    data-message="Are you sure you want to delete this subject?"
+                                >
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

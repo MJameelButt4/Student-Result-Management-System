@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+
+        <h1 class="fw-bold">
+            Welcome, {{ username }} 👋
+        </h1>
+
+        <p class="text-muted">
+            Manage your student profile and academic results.
+        </p>
+
+    </div>
+
+
+    {% if student %}
+
+    <div class="row g-4">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        <i class="fa-solid fa-user text-primary me-2"></i>
+                        Student Profile
+                    </h5>
+
+                    <hr>
+
+                    <p>
+                        <strong>Name:</strong>
+                        {{ student["name"] }}
+                    </p>
+
+                    <p>
+                        <strong>Age:</strong>
+                        {{ student["age"] }}
+                    </p>
+
+                    <p>
+                        <strong>Department:</strong>
+                        {{ student["department"] }}
+                    </p>
+
+                    <p>
+                        <strong>Semester:</strong>
+                        {{ student["semester"] }}
+                    </p>
+
+                    <a
+                        href="/edit-profile"
+                        class="btn btn-outline-primary"
+                    >
+                        <i class="fa-solid fa-pen me-2"></i>
+                        Edit Profile
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">
+                        <i class="fa-solid fa-chart-column text-success me-2"></i>
+                        Academic Results
+                    </h5>
+
+                    <hr>
+
+                    <p class="text-muted">
+                        View your subjects and marks.
+                    </p>
+
+                    <a
+                        href="/subjects"
+                        class="btn btn-outline-success me-2"
+                    >
+                        <i class="fa-solid fa-book me-2"></i>
+                        Subjects
+                    </a>
+
+                    <a
+                        href="/results"
+                        class="btn btn-success"
+                    >
+                        <i class="fa-solid fa-chart-column me-2"></i>
+                        Results
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="card shadow-sm">
+
+        <div class="card-body text-center p-5">
+
+            <i class="fa-solid fa-user-plus text-primary"
+               style="font-size: 60px;">
+            </i>
+
+            <h3 class="fw-bold mt-3">
+                Create Your Profile
+            </h3>
+
+            <p class="text-muted">
+                You haven't created your student profile yet.
+            </p>
+
+            <a
+                href="/profile"
+                class="btn btn-primary"
+            >
+                Create Profile
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

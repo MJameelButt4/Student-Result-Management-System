@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Subject</title>
+</head>
+
+<body>
+
+<h1>Edit Subject</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="subject_name"
+        value="{{ subject['subject_name'] }}"
+        required
+    >
+
+    <button type="submit">
+        Update Subject
+    </button>
+
+</form>
+
+<br>
+
+<a href="/admin/subjects">
+    Back
+</a>
+
+</body>
+
+</html>

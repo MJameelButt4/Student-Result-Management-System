@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Marks
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-warning">
+
+                    <h4 class="mb-0">
+
+                        <i class="fa-solid fa-pen-to-square me-2"></i>
+
+                        Add Student Marks
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Student
+                            </label>
+
+                            <select
+                                name="student_id"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Student
+                                </option>
+
+                                {% for student in students %}
+
+                                <option value="{{ student['id'] }}">
+
+                                    {{ student['name'] }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Subject
+                            </label>
+
+                            <select
+                                name="subject_id"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Subject
+                                </option>
+
+                                {% for subject in subjects %}
+
+                                <option value="{{ subject['id'] }}">
+
+                                    {{ subject['subject_name'] }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Marks
+                            </label>
+
+                            <input
+                                type="number"
+                                name="marks"
+                                id="marks"
+                                class="form-control"
+                                min="0"
+                                max="100"
+                                placeholder="0 - 100"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning w-100"
+                        >
+
+                            <i class="fa-solid fa-check me-2"></i>
+
+                            Save Marks
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

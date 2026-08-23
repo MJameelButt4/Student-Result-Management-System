@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Results
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h1 class="fw-bold">
+
+                <i class="fa-solid fa-chart-column text-primary me-2"></i>
+
+                My Results
+
+            </h1>
+
+            <p class="text-muted">
+                Your subject-wise marks
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if results %}
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>
+                                Subject
+                            </th>
+
+                            <th>
+                                Marks
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for result in results %}
+
+                        <tr>
+
+                            <td>
+
+                                <i class="fa-solid fa-book text-primary me-2"></i>
+
+                                {{ result["subject_name"] }}
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-primary">
+
+                                    {{ result["marks"] }}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="alert alert-info mt-4">
+
+                <strong>
+                    Total Marks:
+                </strong>
+
+                {{ total_marks }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info">
+
+        <i class="fa-solid fa-circle-info me-2"></i>
+
+        No results available.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
